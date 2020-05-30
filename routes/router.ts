@@ -1,4 +1,4 @@
-import { Router } from "https://deno.land/x/oak/mod.ts";
+import { Router } from "../deps.ts";
 import bookController from "../controllers/bookController.ts";
 
 const router: Router = new Router();
@@ -17,4 +17,4 @@ router.post("/books", bookController.store);
 router.put("/books/:id", bookController.update);
 router.delete("/books/:id", bookController.delete);
 
-export { router };
+export default router;

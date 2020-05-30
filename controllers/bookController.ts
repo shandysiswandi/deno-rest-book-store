@@ -1,11 +1,16 @@
-import { RouterContext } from "https://deno.land/x/oak/mod.ts";
+import { RouterContext } from "../deps.ts";
 import bookService from "../services/bookService.ts";
 
 class BookController {
   async index(context: RouterContext) {
     const books = await bookService.getAllBooks();
     context.response.headers.set("Content-Type", "application/json");
-    context.response.body = { data: books };
+    context.response.status = 200;
+    context.response.body = {
+      status: true,
+      message: "all books",
+      data: books,
+    };
   }
 
   async show(context: RouterContext) {
@@ -16,9 +21,9 @@ class BookController {
   }
 
   async store(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
+    const result = await context.request.body({
+      contentTypes: { text: ["application/json"] },
+    });
     const book = result.value;
 
     await bookService.createBook(book);
@@ -28,9 +33,9 @@ class BookController {
   }
 
   async update(context: RouterContext) {
-    const result = await context.request.body(
-      { contentTypes: { text: ["application/json"] } },
-    );
+    const result = await context.request.body({
+      contentTypes: { text: ["application/json"] },
+    });
     const book = result.value;
     const { id } = context.params;
     await bookService.updateBook(parseInt(id!), book);
