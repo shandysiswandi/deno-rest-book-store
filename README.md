@@ -2,8 +2,6 @@
 
 ### Project Structure
 
-.. code-block:: raw
-
     deno-rest-book-store
     ├── config
     | └── ...
