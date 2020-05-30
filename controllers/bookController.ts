@@ -1,9 +1,9 @@
 import { RouterContext } from "../deps.ts";
-import bookService from "../services/bookService.ts";
+import bookRepository from "../repositories/BookRepository.ts";
 
 class BookController {
   async index(context: RouterContext) {
-    const books = await bookService.getAllBooks();
+    const books = await bookRepository.getAllBooks();
     context.response.headers.set("Content-Type", "application/json");
     context.response.status = 200;
     context.response.body = {
@@ -15,7 +15,7 @@ class BookController {
 
   async show(context: RouterContext) {
     const { id } = context.params;
-    const book = await bookService.getBookById(parseInt(id!));
+    const book = await bookRepository.getBookById(parseInt(id!));
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { data: book };
   }
@@ -26,7 +26,7 @@ class BookController {
     });
     const book = result.value;
 
-    await bookService.createBook(book);
+    await bookRepository.createBook(book);
 
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { message: "success" };
@@ -38,7 +38,7 @@ class BookController {
     });
     const book = result.value;
     const { id } = context.params;
-    await bookService.updateBook(parseInt(id!), book);
+    await bookRepository.updateBook(parseInt(id!), book);
 
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { message: "success" };
@@ -46,7 +46,7 @@ class BookController {
 
   async delete(context: RouterContext) {
     const { id } = context.params;
-    await bookService.deleteBook(parseInt(id!));
+    await bookRepository.deleteBook(parseInt(id!));
 
     context.response.headers.set("Content-Type", "application/json");
     context.response.body = { message: "success" };
