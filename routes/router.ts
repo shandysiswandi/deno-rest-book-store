@@ -1,5 +1,5 @@
 import { Router } from "../deps.ts";
-import bookController from "../controllers/BookController.ts";
+import bookRouter from "./bookRouter.ts";
 
 const router: Router = new Router();
 
@@ -11,10 +11,4 @@ router.get("/", (ctx) => {
   };
 });
 
-router.get("/books", bookController.index);
-router.get("/books/:id", bookController.show);
-router.post("/books", bookController.store);
-router.put("/books/:id", bookController.update);
-router.delete("/books/:id", bookController.delete);
-
-export default router;
+export { router, bookRouter };
