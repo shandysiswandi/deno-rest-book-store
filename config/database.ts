@@ -1,5 +1,4 @@
-import { Client } from "https://deno.land/x/postgres/mod.ts";
-import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { Client, config } from "../deps.ts";
 
 export default new Client({
   user: config().DB_USERNAME,
