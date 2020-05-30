@@ -2,26 +2,30 @@
 
 ### Project Structure
 
-    deno-rest-book-store
-    ├── config
+    deno-rest-book-store        # project name
+    ├── config                  # config application like 'database'
     | └── ...
-    ├── controllers
+    ├── controllers             #
     │ └── ...
-    ├── handlers
+    ├── handlers                # hand
     │ └── ...
-    ├── middleware
+    ├── middleware              #
     │ └── ...
-    ├── models
+    ├── models                  #
     │ └── ...
-    ├── repositories
+    ├── repositories            #
     │ └── ...
-    ├── routes
+    ├── routes                  #
     │ └── ...
-    ├── utils
+    ├── utils                   #
     │ └── ...
-    ├── .env
-    ├── .env-example
-    ├── .gitignore
-    ├── app.ts
-    ├── deps.ts
-    └── README.md
+    ├── .env                    #
+    ├── .env-example            #
+    ├── .gitignore              #
+    ├── app.ts                  #
+    ├── deps.ts                 #
+    └── README.md               #
+
+### run the app
+
+    deno run --allow-read --allow-net app.ts
