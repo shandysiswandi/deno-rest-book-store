@@ -1,14 +1,11 @@
-import { Application, config } from "./deps.ts";
-import database from "./config/database.ts";
-import { routes } from "./routes/router.ts";
+import { Application } from "./deps.ts";
+import { routes } from "./routes/routes.ts";
+import { start } from "./utils/server.ts";
 
 /**
  * Initial variable
- * @app instance from @Application
- * @env assign @config
  */
-const app: Application = new Application();
-const env = config();
+const app = new Application();
 
 /**
  * Initial all route
@@ -16,16 +13,6 @@ const env = config();
 routes(app);
 
 /**
- * Connect to database
+ * Start application
  */
-await database.connect();
-
-/**
- * Listen app to config env
- */
-await app.listen({ port: parseInt(env.PORT) });
-
-/**
- * close/end to database
- */
-await database.end();
+start(app);
