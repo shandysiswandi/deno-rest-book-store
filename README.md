@@ -1,6 +1,8 @@
-# Dinosaurs
+![examples](Dinosaurs.jpg)
 
 ## About Dinosaurs
+
+is a
 
 ## Project Structure
 
