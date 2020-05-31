@@ -1,14 +1,11 @@
-import { Router } from "../deps.ts";
+import { Application } from "../deps.ts";
+import homeRouter from "./homeRouter.ts";
 import bookRouter from "./bookRouter.ts";
 
-const router: Router = new Router();
+export const routes = (app: Application) => {
+  app.use(homeRouter.routes());
+  app.use(homeRouter.allowedMethods());
 
-router.get("/", (ctx) => {
-  ctx.response.status = 200;
-  ctx.response.body = {
-    status: true,
-    message: "Hello Home",
-  };
-});
-
-export { router, bookRouter };
+  app.use(bookRouter.routes());
+  app.use(bookRouter.allowedMethods());
+};
