@@ -1,31 +1,35 @@
 import { Application, Router } from "../deps.ts";
-import BookController from "../controllers/BookController.ts";
-import HomeController from "../controllers/HomeController.ts";
-import { errorHandler } from "../handlers/errors.ts";
+import { home, book } from "../controllers/mod.ts";
+import { timing, logger } from "../middleware/mod.ts";
+import { handleErrors } from "../handlers/errors.ts";
 
 const router = new Router();
-const baseApi = "api/v1/";
+const api = "api/v1/";
 
 /**
  * @home : /
  */
-router.get("/", HomeController.index);
+router.get("/", home.index);
 
 /**
  * @book : /api/v1/books
  */
 router
-  .get(baseApi + "/books", BookController.index)
-  .get(baseApi + "/books/:id", BookController.show)
-  .post(baseApi + "/books", BookController.store)
-  .put(baseApi + "/books/:id", BookController.update)
-  .delete(baseApi + "/books/:id", BookController.delete);
+  .get(api + "/books", book.index)
+  .get(api + "/books/:id", book.show)
+  .post(api + "/books", book.store)
+  .put(api + "/books/:id", book.update)
+  .delete(api + "/books/:id", book.delete);
 
 export const routes = (app: Application) => {
+  // middleware
+  app.use(timing);
+  app.use(logger);
+
+  // errors handling
+  app.use(handleErrors);
+
   // asignment routes
   app.use(router.routes());
   app.use(router.allowedMethods());
-
-  // error handling
-  app.use(errorHandler);
 };
