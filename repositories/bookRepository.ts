@@ -1,9 +1,9 @@
-import Client from "../config/database.ts";
+import database from "../config/database.ts";
 import Book from "../models/Book.ts";
 
 class BookRepository {
   getAllBooks = async () => {
-    const result = await Client.query("SELECT * FROM books");
+    const result = await database.query("SELECT * FROM books");
     const books = new Array<Book>();
 
     result.rows.map((book) => {
@@ -18,7 +18,7 @@ class BookRepository {
   };
 
   getBookById = async (id: number) => {
-    const result = await Client.query({
+    const result = await database.query({
       text: "SELECT * FROM books WHERE id=$1",
       args: [id],
     });
@@ -34,21 +34,21 @@ class BookRepository {
   };
 
   createBook = async (book: Book) => {
-    return await Client.query({
+    return await database.query({
       text: "INSERT INTO books (title, author, price) VALUES ($1, $2, $3)",
       args: [book.title, book.author, book.price],
     });
   };
 
   updateBook = async (id: number, book: Book) => {
-    return await Client.query({
+    return await database.query({
       text: "UPDATE books SET title=$1, author=$2, price=$3 WHERE id=$4",
       args: [book.title, book.author, book.price, id],
     });
   };
 
   deleteBook = async (id: number) => {
-    return await Client.query({
+    return await database.query({
       text: "DELETE FROM books WHERE id=$1",
       args: [id],
     });
