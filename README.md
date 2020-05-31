@@ -1,8 +1,10 @@
-# DENO REST API with OAK and POSTGRESQL
+# Dinosaurs
 
-### Project Structure
+## About Dinosaurs
 
-    deno-rest-book-store        # project name
+## Project Structure
+
+    dinosaurs                   # project name
     ├── config                  # config application like 'database'
     | └── ...
     ├── controllers             #
@@ -26,6 +28,10 @@
     ├── deps.ts                 #
     └── README.md               #
 
-### run the app
+## Run Application
 
-    deno run --allow-read --allow-net app.ts
+    deno run --allow-net --allow-read --allow-write app.ts
+
+## License
+
+The Dinosaurs project is open-sourced software licensed under the [MIT license](LICENSE).
