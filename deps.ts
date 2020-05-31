@@ -2,7 +2,11 @@
 export { config } from "https://deno.land/x/dotenv/mod.ts";
 
 // postgresql
-export { Client as PostgreSQL } from "https://deno.land/x/postgres/mod.ts";
+export {
+  Client as PostgreSQL,
+  Pool,
+  PostgresError,
+} from "https://deno.land/x/postgres/mod.ts";
 
 // mysql
 export { Client as MySQL } from "https://deno.land/x/mysql/mod.ts";
