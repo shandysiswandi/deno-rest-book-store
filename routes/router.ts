@@ -1,5 +1,6 @@
 import { Application, Router } from "../deps.ts";
 import bookController from "../controllers/BookController.ts";
+import { errorHandler } from "../handlers/errors.ts";
 
 const router = new Router();
 const baseApi = "api/v1/";
@@ -26,6 +27,10 @@ router
   .delete(baseApi + "/books/:id", bookController.delete);
 
 export const routes = (app: Application) => {
+  // asignment routes
   app.use(router.routes());
   app.use(router.allowedMethods());
+
+  // error handling
+  app.use(errorHandler);
 };
