@@ -1,19 +1,31 @@
 import { Application, config } from "./deps.ts";
-import { router, bookRouter } from "./routes/router.ts";
-import Client from "./config/database.ts";
+import database from "./config/database.ts";
+import { routes } from "./routes/router.ts";
 
+/**
+ * Initial variable
+ * @app instance from @Application
+ * @env assign @config
+ */
 const app: Application = new Application();
 const env = config();
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+/**
+ * Initial all route
+ */
+routes(app);
 
-app.use(bookRouter.routes());
-app.use(bookRouter.allowedMethods());
+/**
+ * Connect to database
+ */
+await database.connect();
 
-await Client.connect();
-
-console.log(`Listening on ${env.HOST}:${env.PORT}`);
+/**
+ * Listen app to config env
+ */
 await app.listen({ port: parseInt(env.PORT) });
 
-await Client.end();
+/**
+ * close/end to database
+ */
+await database.end();
