@@ -1,5 +1,5 @@
 import { Application } from "./deps.ts";
-import { routes } from "./routes/routes.ts";
+import { routes } from "./routes/router.ts";
 import { start } from "./utils/server.ts";
 
 /**
